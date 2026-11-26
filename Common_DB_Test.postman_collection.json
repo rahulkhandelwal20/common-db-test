@@ -1,0 +1,237 @@
+{
+  "info": {
+    "_postman_id": "d131aba6-11fe-409f-a6ec-da76e61654a9",
+    "name": "Common_DB_Test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "10702676"
+  },
+  "item": [
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"rahul@gmail.com\",\r\n    \"password\": \"shani@123\",\r\n    \"role\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:80/commonTest/user/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "80",
+              "path": [
+                "commonTest",
+                "user",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = pm.response.json();\r\npm.environment.set(\"token\", jsonData.data.result.accessToken);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"rahul@gmail.com\",\r\n    \"password\": \"shani@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:80/commonTest/user/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "80",
+              "path": [
+                "commonTest",
+                "user",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User List",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "access-token",
+                "value": "{{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:80/commonTest/user",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "80",
+              "path": [
+                "commonTest",
+                "user"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "shani@gmail.com",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Detail",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "access-token",
+                "value": "{{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:80/commonTest/user/:uuid",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "80",
+              "path": [
+                "commonTest",
+                "user",
+                ":uuid"
+              ],
+              "variable": [
+                {
+                  "key": "uuid",
+                  "value": "76790cf0-0f71-4fd5-a117-aa5da4ee2473"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "access-token",
+                "value": "{{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"password\": \"rahul@123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:80/commonTest/user/:uuid",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "80",
+              "path": [
+                "commonTest",
+                "user",
+                ":uuid"
+              ],
+              "variable": [
+                {
+                  "key": "uuid",
+                  "value": "76790cf0-0f71-4fd5-a117-aa5da4ee2473"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Users",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "access-token",
+                "value": "{{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"uuid\": [\n        \"76790cf0-0f71-4fd5-a117-aa5da4ee2473\"\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:80/commonTest/user",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "80",
+              "path": [
+                "commonTest",
+                "user"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
